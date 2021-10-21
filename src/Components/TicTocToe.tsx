@@ -14,7 +14,7 @@ const TicTocToe = () => {
   const [xplayer, setXPlayer] = useState(true);
   const [board, setBoard] = useState(boardArr);
   const [winner, setWinner] = useState("");
-  const handleClick = (index) => {
+  const handleClick = (index: number) => {
     console.log("index", index);
     const temp = [...board];
     if (xplayer) {

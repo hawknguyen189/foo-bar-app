@@ -6,9 +6,12 @@ import React from "react";
  * @param {string}  targetName the target name
  * @return {number} sum of all items value that is equal to targetName
  */
-function sumAllElementsByName(items, targetName) {
+function sumAllElementsByName(items: any[], targetName: string) {
   return items.reduce(
-    (acc, element) =>
+    (
+      acc: { sum: any; count: number; avg: any },
+      element: { name: any; value: any }
+    ) =>
       element.name === targetName
         ? {
             sum: acc.sum + element.value,
@@ -26,9 +29,12 @@ function sumAllElementsByName(items, targetName) {
  * @param {string}  targetName the target name
  * @return {number} average of all items value that is equal to targetName
  */
-function avgAllElementsByName(items, targetName) {
+function avgAllElementsByName(items: any[], targetName: string) {
   return items.reduce(
-    (acc, element) =>
+    (
+      acc: { sum: any; count: number; avg: any },
+      element: { name: any; value: any }
+    ) =>
       element.name === targetName
         ? {
             sum: acc.sum + element.value,
@@ -73,7 +79,7 @@ console.log("result", result, "avg", average);
 // c) Please add JSDoc-compatible documentation to all methods in classes `A` and `B`
 // This function will have a side effect and return its input
 // const makeRequest = require("some-request-library");
-const makeRequest = async (value) => {
+const makeRequest = async (value: any) => {
   return value;
 };
 /**
@@ -85,7 +91,9 @@ class A {
    * constructor description
    * @param  {string} someField create new instance with a provided string
    */
-  constructor(someField) {
+  _someField: string;
+  _separator: string;
+  constructor(someField: string) {
     this._someField = someField;
     this._separator = " ";
   }
@@ -95,7 +103,7 @@ class A {
    * @param {array} values the test input array
    * @return {string} the concentrated value
    */
-  concatenameFields(instance, values) {
+  concatenameFields(instance: { _separator: any }, values: any[]) {
     return values.join(instance._separator);
   }
   /**
@@ -104,8 +112,8 @@ class A {
    * @param {array} items the test input objects array
    * @return {string} the final result
    */
-  async save(instance, items) {
-    const values = items.map((name) => name.name);
+  async save(instance: A | B, items: any[]) {
+    const values = items.map((name: { name: any }) => name.name);
     const finalValue = this.concatenameFields(instance, values);
     const result = await makeRequest(finalValue);
     return `THE RESULT IS: ${result}`;
@@ -120,7 +128,7 @@ class B extends A {
    * constructor description
    * @param  {string} someField create new instance with a provided string
    */
-  constructor(someField) {
+  constructor(someField: string) {
     super(someField);
     this._separator = "-";
   }
@@ -129,9 +137,9 @@ class B extends A {
    * @param {array} values the test input array
    * @return {string} the concentrated value
    */
-  concatenameFields(...values) {
-    return `[${super.concatenameFields(...values)}]`;
-  }
+  // concatenameFields(...values: any[]) {
+  //   return `[${super.concatenameFields(values)}]`;
+  // }
 }
 
 async function testQuestion4() {
